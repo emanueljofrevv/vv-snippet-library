@@ -13,6 +13,8 @@ let TokenLESProgramNameAndRegion = "[LES Program Name And Region]";
 // Remove duplicate email addresses.
 commLogUniqueEmailAddresses = [...new Set(commLogUniqueEmailAddresses)];
 
+shortDescription = "Creating Emails and generating Communication Log";
+
 let tokenArr = [
     { name: TokenAgencyName, value: AgencyLegalName },
     { name: TokenLESProgramNameAndRegion, value: LESProgramNameAndRegion },
@@ -33,18 +35,9 @@ let emailRequestArr = [
     },
 ];
 
-let emailCommLogResp = await vvClient.scripts.runWebService("LibEmailGenerateAndCreateCommunicationLog", emailRequestArr);
-let emailCommLogData = emailCommLogResp.hasOwnProperty("data") ? emailCommLogResp.data : null;
-
-if (emailCommLogResp.meta.status !== 200) {
-    throw new Error(`There was an error when calling LibEmailGenerateAndCreateCommunicationLog.`);
-}
-if (!emailCommLogData || !Array.isArray(emailCommLogData)) {
-    throw new Error(`Data was not returned when calling LibEmailGenerateAndCreateCommunicationLog.`);
-}
-if (emailCommLogData[0] === "Error") {
-    throw new Error(`The call to LibEmailGenerateAndCreateCommunicationLog returned with an error. ${emailCommLogData[1]}.`);
-}
-if (emailCommLogData[0] !== "Success") {
-    throw new Error(`The call to LibEmailGenerateAndCreateCommunicationLog returned with an unhandled error.`);
-}
+let emailCommLogResp = await vvClient.scripts
+    .runWebService("LibEmailGenerateAndCreateCommunicationLog", emailRequestArr)
+    .then((res) => parseRes(res))
+    .then((res) => checkMetaAndStatus(res, shortDescription))
+    .then((res) => checkDataPropertyExists(res, shortDescription))
+    .then((res) => checkDataIsNotEmpty(res, shortDescription));

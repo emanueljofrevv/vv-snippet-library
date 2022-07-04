@@ -1,6 +1,8 @@
 let EmailArray = []; //array will contain the array of email addresses.
 let recipientList = "";
 
+shortDescription = `Get Users data`;
+
 const groupsParamArr = [
     {
         name: "groups",

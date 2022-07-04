@@ -8,3 +8,5 @@ const relatedDocumentsResp = await vvClient.forms
     .then((res) => checkMetaAndStatus(res, shortDescription))
     .then((res) => checkDataPropertyExists(res, shortDescription))
     .then((res) => checkDataIsNotEmpty(res, shortDescription));
+
+// Remember to add parseRes, checkMetaAndStatus, checkDataPropertyExists and checkDataIsNotEmpty to the helper functions section
