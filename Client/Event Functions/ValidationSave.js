@@ -1,7 +1,7 @@
 //PROCESS NAME for TEMPLATE NAME
 
-const message = "The record has been saved.";
 const title = "Save Form";
+let message = "The record has been saved.";
 
 //Measuring the form validation
 if (VV.Form.Template.FormValidation() === true) {

@@ -21,8 +21,8 @@ var fields =
 ];
 */
 
-var deferred = $.Deferred();
-var promiseArray = [];
+const deferred = $.Deferred();
+let promiseArray = [];
 
 // Add the promises to the array
 for (let i = 0; i < fields.length; i++) {

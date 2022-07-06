@@ -24,7 +24,7 @@ const comparisonVal = parseArg(ComparisonValue);
 
 // Helper function for parsing
 function parseArg(arg) {
-    let argValue = arg;
+    const argValue = arg;
 
     if (typeof argValue === "string") {
         // Removes whitespace from both sides of a string

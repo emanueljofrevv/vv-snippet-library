@@ -1,25 +1,46 @@
 // This is the email patern for calling the LibEmailGenerateAndCreateCommunicationLog.
-// Main update is in the OTHERFIELDSTOUPDATE object.
 
+let shortDescription = "Creating Emails and generating Communication Log";
 // Email Template Variables for sending email.
-let emailTemplateName = "Generic Template Name";
+const emailTemplateName = "Generic Template Name";
+const GenericTokenOne = "[Generic Token Name One]";
+const GenericTokenTwo = "[Generic Token Name Two]";
 
-let GenericTokenOne = "[Generic Token Name One]";
-let GenericTokenTwo = "[Generic Token Name Two]";
-
-shortDescription = "Creating Emails and generating Communication Log";
-
-let tokenArr = [
-    { name: GenericTokenOne, value: GenericTokenOneValue },
-    { name: GenericTokenTwo, value: GenericTokenTwoValue },
+const tokenArr = [
+    {
+        name: GenericTokenOne,
+        value: "GenericTokenOneValue",
+    },
+    {
+        name: GenericTokenTwo,
+        value: "GenericTokenTwoValue",
+    },
 ];
-let emailRequestArr = [
-    { name: "Email Name", value: emailTemplateName },
-    { name: "Tokens", value: tokenArr },
-    { name: "Email Address", value: commLogUniqueEmailAddresses.join(",") },
-    { name: "Email AddressCC", value: "" },
-    { name: "SendDateTime", value: "" },
-    { name: "RELATETORECORD", value: [RecordIDOne, RecordIDTwo] },
+const emailRequestArr = [
+    {
+        name: "Email Name",
+        value: emailTemplateName,
+    },
+    {
+        name: "Tokens",
+        value: tokenArr,
+    },
+    {
+        name: "Email Address",
+        value: commLogUniqueEmailAddresses.join(","),
+    },
+    {
+        name: "Email AddressCC",
+        value: "",
+    },
+    {
+        name: "SendDateTime",
+        value: "",
+    },
+    {
+        name: "RELATETORECORD",
+        value: [RecordIDOne, RecordIDTwo],
+    },
     {
         name: "OTHERFIELDSTOUPDATE",
         value: {
@@ -30,7 +51,7 @@ let emailRequestArr = [
     },
 ];
 
-let emailCommLogResp = await vvClient.scripts
+const emailCommLogResp = await vvClient.scripts
     .runWebService("LibEmailGenerateAndCreateCommunicationLog", emailRequestArr)
     .then((res) => parseRes(res))
     .then((res) => checkMetaAndStatus(res, shortDescription))
